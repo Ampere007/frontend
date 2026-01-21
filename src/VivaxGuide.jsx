@@ -1,25 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './FalciparumGuide.css'; // CSS remains untouched
+import './VivaxGuide.css'; // ใช้ CSS ไฟล์ใหม่ที่ก๊อปปี้มาจากอันเดิม
 
-// --- Import Images (Unchanged) ---
-import dhaPipImage from './assets/eurartesim.png';
+// --- Import Images ---
+// เปลี่ยนจาก dhaPipImage เป็น Chloroquine
+import chloroquineImage from './assets/Chloroquine.png'; 
 import primaquineImage from './assets/Primaquine.png';
 
-function FalciparumGuide() {
+function VivaxGuide() {
   const navigate = useNavigate();
 
   return (
     <div className="medication-guide-page">
       <header className="guide-header">
-        {/* Adjusted Title to English */}
-        <h1 className="guide-title">Treatment Guide: <i>P. falciparum</i></h1>
+        {/* เปลี่ยนชื่อเชื้อเป็น Vivax */}
+        <h1 className="guide-title">Treatment Guide: <i>P. vivax</i></h1>
         <p className="guide-subtitle">
-          (Uncomplicated cases in areas without drug resistance)
+          (Uncomplicated cases: Radical Cure Regimen)
         </p>
       </header>
 
-      {/* --- Disclaimer Section --- */}
+      {/* --- Disclaimer Section (เหมือนเดิม) --- */}
       <div className="disclaimer-section">
         <div className="disclaimer-card">
           <h4 className="disclaimer-title">⚠️ Important Medical Disclaimer</h4>
@@ -36,11 +37,11 @@ function FalciparumGuide() {
       
       {/* --- Combo Box --- */}
       <div className="regimen-combo-box">
-        {/* --- Drug 1 --- */}
+        {/* --- Drug 1: Chloroquine --- */}
         <div className="combo-item">
-          <img src={dhaPipImage} alt="Dihydroartemisinin-Piperaquine" className="combo-image" />
-          <h4 className="combo-name">Dihydroartemisinin-Piperaquine (DHA-PIP)</h4>
-          <p>(Fixed-dose Combination)</p>
+          <img src={chloroquineImage} alt="Chloroquine" className="combo-image" />
+          <h4 className="combo-name">Chloroquine</h4>
+          <p>(Blood Schizontocide)</p>
         </div>
 
         {/* --- Plus Sign --- */}
@@ -48,11 +49,11 @@ function FalciparumGuide() {
           <span>+</span>
         </div>
 
-        {/* --- Drug 2 --- */}
+        {/* --- Drug 2: Primaquine --- */}
         <div className="combo-item">
           <img src={primaquineImage} alt="Primaquine" className="combo-image" />
           <h4 className="combo-name">Primaquine</h4>
-          <p>(Single Dose)</p>
+          <p>(Anti-relapse / 14 Days)</p>
         </div>
       </div>
 
@@ -71,26 +72,26 @@ function FalciparumGuide() {
             </tr>
           </thead>
           <tbody>
-            {/* --- DHA-PIP Row --- */}
+            {/* --- Chloroquine Row (กิน 3 วันเหมือน DHA-PIP) --- */}
             <tr>
               <td>
-                <strong>Dihydroartemisinin-Piperaquine</strong>
+                <strong>Chloroquine</strong>
                 <br/>
-                <span className="table-note">(Should be taken at the same time every day)</span>
+                <span className="table-note">(Initial dose followed by subsequent doses)</span>
               </td>
-              <td>1 Dose</td>
-              <td>1 Dose</td>
-              <td>1 Dose</td>
+              <td>1 Dose (Start)</td>
+              <td>1 Dose (+6-8 hrs)</td>
+              <td>1 Dose (Daily)</td>
             </tr>
-            {/* --- Primaquine Row --- */}
+            {/* --- Primaquine Row (กิน 14 วัน) --- */}
             <tr>
               <td>
                 <strong>Primaquine</strong>
               </td>
               <td colSpan="3" className="primaquine-dose">
-                <strong>Single dose on any one day</strong>
+                <strong>1 Dose Daily for 14 Days</strong>
                 <br/>
-                <span className="table-note">(Provided the patient can tolerate oral intake without vomiting)</span>
+                <span className="table-note">(Start after checking G6PD status. Take with food.)</span>
               </td>
             </tr>
           </tbody>
@@ -107,4 +108,4 @@ function FalciparumGuide() {
   );
 }
 
-export default FalciparumGuide;
+export default VivaxGuide;

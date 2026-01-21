@@ -1,375 +1,404 @@
 /* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;700&display=swap');
 
-/* --- Basic & Main Container --- */
+:root {
+  /* --- Color Palette --- */
+  --primary: #3b82f6;        /* Modern Blue */
+  --primary-dark: #2563eb;
+  --primary-light: #eff6ff;
+  --secondary: #64748b;      /* Slate Grey */
+  
+  --bg-main: #f8fafc;        /* Very Light Grey Blue Background */
+  --surface: #ffffff;        /* Pure White Cards */
+  
+  /* Status Colors */
+  --success: #10b981;        /* Emerald */
+  --warning: #f59e0b;        /* Amber */
+  --danger: #ef4444;         /* Red */
+  
+  /* Text */
+  --text-main: #1e293b;      /* Slate 900 */
+  --text-muted: #94a3b8;     /* Slate 400 */
+
+  /* Shadows & Radius */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --radius: 24px;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f4f7f6;
-  color: #333;
+  font-family: 'Inter', 'Sarabun', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
+
 .app-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.container {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 30px;
-  box-sizing: border-box;
-}
-.header {
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.header h1 { margin: 0; color: #1a73e8; }
-.header p { margin: 5px 0 0; color: #5f6368; }
-
-/* --- Upload Section --- */
-.upload-section form { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-.file-input { width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1; }
-.file-label { background-color: #e8f0fe; color: #1967d2; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background-color 0.2s; text-align: center; }
-.file-label:hover { background-color: #d2e3fc; }
-.analyze-button { background-color: #1a73e8; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.2s; }
-.analyze-button:disabled { background-color: #9e9e9e; cursor: not-allowed; }
-.analyze-button:hover:not(:disabled) { background-color: #185abc; }
-.error-message { color: #d93025; text-align: center; margin-top: 10px; }
-
-/* --- Layout --- */
-.results-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 30px;
-}
-.results-left, .results-right {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  padding-bottom: 60px;
 }
-@media (max-width: 900px) {
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.header p {
+  color: var(--secondary);
+  font-size: 1.1rem;
+  margin-top: 12px;
+  font-weight: 400;
+}
+
+/* --- Upload Section --- */
+.upload-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 80px 40px;
+  text-align: center;
+  border: 2px dashed #cbd5e1;
+  transition: all 0.3s ease;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.upload-section:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 20px;
+}
+
+.file-label:hover {
+  background-color: #dbeafe;
+  transform: scale(1.05);
+}
+
+.analyze-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 16px 50px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s;
+}
+
+.analyze-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* --- Loader --- */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 40px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- Results Grid Layout --- */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Left 40% - Right 60% */
+  gap: 30px;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
   .results-grid { grid-template-columns: 1fr; }
 }
 
-/* --- General Components --- */
-.preview-image { max-width: 100%; border-radius: 8px; border: 1px solid #ddd; }
-.loader { border: 4px solid #f3f3f3; border-top: 4px solid #1a73e8; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 30px auto; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.diagnosis { text-align: center; background-color: #e6f4ea; color: #1e8e3e; padding: 15px; border-radius: 8px; }
-.diagnosis p { margin: 5px 0; }
-.detail-card { background-color: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; }
-.detail-card h4 { margin-top: 0; color: #343a40; border-bottom: 1px solid #e9ecef; padding-bottom: 10px; margin-bottom: 15px; font-size: 1.1rem; }
-.detail-card p { margin: 8px 0; }
-.results-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-.results-table th, .results-table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 0.9rem; }
-.results-table th { background-color: #f8f9fa; font-weight: 600; }
-.view-image-btn { padding: 4px 10px; font-size: 12px; border: 1px solid #1a73e8; background-color: #e8f0fe; color: #1967d2; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
-.view-image-btn:hover { background-color: #d2e3fc; }
+/* --- Cards (General) --- */
+.detail-card {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+}
 
-/* --- ✨ ส่วนที่เพิ่ม: แก้ปัญหาข้อความ Diagnosis ถูกตัด ✨ --- */
-.diagnosis-cell {
-  white-space: nowrap;
+.detail-card h4 {
+  margin-top: 0;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-/* --------------------------------------------------- */
 
-/* --- Summary Checklist --- */
-.summary-checklist .checklist-item { display: flex; align-items: center; font-size: 1.1rem; margin-bottom: 15px; }
-.summary-checklist .checklist-icon { font-size: 1.5rem; font-weight: bold; margin-right: 15px; width: 30px; text-align: center; }
-.checklist-icon.found { color: #28a745; }
-.checklist-icon.not-found { color: #dc3545; }
-
-/* --- Galleries --- */
-.chromatin-abnormal-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-  gap: 10px;
-}
-.distance-measurement-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 15px;
-}
-.chromatin-cell-item, 
-.distance-cell-item {
-  width: 90px;
-  height: 90px;
-  text-align: center;
-}
-.chromatin-cell-item img,
-.distance-cell-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 2px solid #ddd;
-  background-color: #000;
-}
-.distance-cell-item {
+.clickable-card {
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  position: relative;
+  border: 1px solid transparent;
 }
-.distance-cell-item:hover {
-  transform: scale(1.05);
-}
-.distance-cell-item p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #5f6368;
+.clickable-card:hover {
+  border-color: var(--primary);
+  background-color: #fcfeff;
+  transform: translateY(-2px);
 }
 
-/* --- Modal --- */
-.detail-card button { margin-top: 15px; padding: 6px 12px; border: 1px solid #1a73e8; background-color: #fff; color: #1a73e8; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
-.detail-card button:hover:not(:disabled) { background-color: #e8f0fe; }
-.detail-card button:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
-.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; }
-.modal-content { background-color: white; padding: 20px 30px; border-radius: 8px; max-width: 95%; max-height: 90vh; overflow-y: auto; text-align: center; }
-.modal-content h3 { margin-top: 0; }
-.close-button { display: block; margin: 20px auto 0; padding: 8px 16px; background-color: #1a73e8; color: white; border: none; border-radius: 5px; cursor: pointer; }
-.abnormal-cells-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
-.abnormal-cell-item { text-align: center; flex-basis: 120px; }
-.abnormal-cell-item img { width: 120px; height: 120px; border-radius: 8px; border: 1px solid #ddd; object-fit: cover; }
-.abnormal-cell-item p { font-size: 12px; margin-top: 5px; color: #5f6368; }
+.preview-image {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
 
-/* --- 🎯 โค้ดส่วนที่แก้ไข 🎯 --- */
+/* --- Diagnosis Hero Card --- */
+.overall-diagnosis-card {
+  background: linear-gradient(120deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 15px 40px -10px rgba(37, 99, 235, 0.5);
+  position: relative;
+  overflow: hidden;
+}
 
-/* ทำให้กล่อง modal สำหรับแสดงภาพเดียว มีขนาดใหญ่ขึ้น */
-/* แก้ไข: เพิ่มจุด '.' ข้างหน้าชื่อคลาส */
-.single-image-modal {
-  max-width: 80vw;   /* กำหนดความกว้างสูงสุด 80% ของหน้าจอ */
-  max-height: 90vh;  /* กำหนดความสูงสูงสุด 90% ของหน้าจอ */
+.overall-diagnosis-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  animation: pulse 10s infinite;
+}
+
+.overall-diagnosis-card h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.overall-diagnosis-card h2 {
+  font-size: 2.5rem;
+  margin: 15px 0 30px 0;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Checklist --- */
+.checklist-grid-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 25px;
+  backdrop-filter: blur(5px);
+}
+
+.checklist-column h5 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.9);
+}
+.checklist-item img {
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+}
+
+/* --- Modals --- */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 
-/* ทำให้ "รูปภาพ" ขยายเต็มความกว้างของกล่อง modal */
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+
+.single-image-modal {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .single-image-modal img {
-  width: 1000%;       /* ขยายความกว้างให้เต็ม 100% */
-  height: auto;      /* ปรับความสูงอัตโนมัติตามสัดส่วน */
-  object-fit: contain;
-  border-radius: 8px;
-  background-color: #000;
-}
-/* frontend/src/App.css */
-
-/* --- เพิ่มสไตล์สำหรับ Overall Diagnosis Card --- */
-.overall-diagnosis-card {
-    background: linear-gradient(135deg, #1a237e 0%, #3f51b5 100%);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-.overall-diagnosis-card h4 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
+.close-button {
+  background: #f1f5f9;
+  color: var(--text-main);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s;
+}
+.close-button:hover { background: #e2e8f0; }
+
+/* --- Gallery Grid --- */
+.abnormal-cells-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.overall-diagnosis-card p {
-    margin-bottom: 0;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-/* frontend/src/App.css */
-
-/* --- เพิ่มสไตล์สำหรับ Overall Diagnosis Card --- */
-.overall-diagnosis-card {
-    background: linear-gradient(135deg, #1a237e 0%, #3f51b5 100%);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-.overall-diagnosis-card h4 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-    color: white; /* Make sure h4 color is white */
-    border-bottom: none; /* Override other h4 styles */
-    padding-bottom: 0;
-}
-.overall-diagnosis-card p {
-    margin-bottom: 0;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-/* --- สไตล์สำหรับ Score Breakdown --- */
-.score-breakdown {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-}
-.score-breakdown h5 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-weight: normal;
-    font-size: 1rem;
-    opacity: 0.9;
-    text-align: left;
-}
-.score-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-.score-label {
-    width: 120px;
-    text-align: right;
-    padding-right: 1rem;
-    font-size: 0.9rem;
-}
-.score-bar-container {
-    flex-grow: 1;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    height: 20px;
-}
-.score-bar {
-    height: 100%;
-    background-color: #ffffff;
-    border-radius: 4px;
-    transition: width 0.5s ease-in-out;
-}
-.score-bar.is-winner {
-    background-color: #4caf50; /* Green for the winner */
-}
-.score-value {
-    width: 50px;
-    text-align: right;
-    padding-left: 1rem;
-    font-weight: bold;
-}
-/* Add these styles to your frontend/src/App.css */
-
-.checklist-item {
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Vertically align items */
-  margin-bottom: 0.5rem; /* Add some space between items */
+.abnormal-cell-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  box-shadow: var(--shadow-sm);
 }
 
-.checklist-status { /* Renamed from checklist-icon for clarity */
-  font-weight: bold;
-  margin-right: 0.75rem; /* Add space between status and label */
-  min-width: 70px; /* Give the status text enough space */
-  text-align: left;
+.abnormal-cell-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
-.checklist-status.found {
-  color: #28a745; /* Green */
+.abnormal-cell-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
 }
 
-.checklist-status.not-found {
-  color: #dc3545; /* Red */
+.abnormal-cell-item p {
+  padding: 10px;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  background: #f8fafc;
+  text-align: center;
+  font-weight: 500;
 }
 
-.checklist-label {
-  /* No specific styles needed now, but keeping the class for structure */
-  flex-grow: 1; /* Allow label to take remaining space */
+/* --- Morphometry Bar --- */
+.morph-bar-bg {
+  height: 14px;
+  background-color: #e2e8f0;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.morph-bar-fill {
+  height: 100%;
+  border-radius: 50px;
+  transition: width 1s ease-out;
+}
+/* --- Interactive Box Style --- */
+.interactive-box {
+  border: 2px solid #ef4444; /* กรอบสีแดง */
+  background-color: rgba(239, 68, 68, 0.2); /* พื้นหลังสีแดงจางๆ */
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  animation: pulseBox 2s infinite; /* เอฟเฟกต์กระพริบ */
 }
 
-/* Optional: Adjust styles for smaller screens if needed */
-/*
-@media (max-width: 600px) {
-  .checklist-status {
-    min-width: 60px;
-    margin-right: 0.5rem;
-  }
-}
-*/
-/* --- 🎨 CSS เพื่อเน้นส่วน Checklist ให้ชัดเจนขึ้น --- */
-
-/* 1. เพิ่มเส้นแบ่งและระยะห่าง ระหว่างส่วน Score และ Checklist */
-.checklist-grid-container {
-  margin-top: 28px;   /* เพิ่มระยะห่างด้านบนให้มากขึ้น */
-  padding-top: 24px;  /* เพิ่มระยะห่างด้านใน (ใต้เส้น) */
-  
-  /* เพิ่มเส้นแบ่งที่ชัดเจน */
-  border-top: 2px solid rgba(255, 255, 255, 0.25); 
+.interactive-box:hover {
+  background-color: rgba(239, 68, 68, 0.5);
+  border-color: #fff;
+  z-index: 20;
 }
 
-/* 2. ขยายขนาดหัวข้อ "DIAGNOSTIC CHECKLIST" ให้ใหญ่และเด่นชัด */
-.checklist-grid-container h4 {
-  font-size: 1.6rem;    /* ขยายฟอนต์ให้ใหญ่ขึ้นมาก */
-  font-weight: 600;       /* เพิ่มความหนา */
-  text-align: center;     /* จัดกลาง */
-  margin-bottom: 28px;    /* เพิ่มระยะห่างด้านล่าง */
-  text-transform: uppercase; /* ทำให้เป็นตัวพิมพ์ใหญ่ทั้งหมด */
-  letter-spacing: 1px;       /* เพิ่มระยะห่างระหว่างตัวอักษร */
+/* Tooltip ที่ลอยอยู่บนหัวกล่อง */
+.box-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0; /* ซ่อนไว้ก่อน */
+  transition: opacity 0.2s;
+  pointer-events: none;
+  margin-bottom: 4px;
 }
 
-/* 3. ขยายขนาดหัวข้อย่อยของแต่ละสายพันธุ์ (P. falciparum, P. vivax, ...) */
-.checklist-column h5 {
-    font-size: 1.25rem;    /* ขยายฟอนต์เล็กน้อย */
-    margin-bottom: 18px; /* เพิ่มระยะห่างด้านล่าง */
+.interactive-box:hover .box-tooltip {
+  opacity: 1; /* โชว์ตอนเอาเมาส์ชี้ */
 }
 
-/* 4. ขยายขนาดรายการตรวจสอบ (ไอคอน + ข้อความ) */
-.checklist-item {
-  margin-bottom: 18px; /* เพิ่มระยะห่างระหว่างรายการ */
-}
-
-.checklist-label {
-  font-size: 1.15rem; /* ขยายขนาดข้อความ */
-  font-weight: 500;   /* เพิ่มความหนาเล็กน้อย */
-}
-
-/* 5. ขยายขนาดไอคอน (จำเป็นต้องใช้ !important เพื่อ override inline-style ใน JSX) */
-.checklist-item img {
-  width: 2.4em !important;   /* ขยายความกว้าง */
-  height: 2.4em !important;  /* ขยายความสูง */
-  margin-right: 14px !important; /* เพิ่มระยะห่างจากข้อความ */
-}
-
-/* (ทางเลือก) ลดความสว่างของแถบ Score ลงเล็กน้อย เพื่อให้ Checklist เด่นขึ้น */
-.score-breakdown {
-    opacity: 0.9;
-    padding-bottom: 10px; /* เพิ่มช่องว่างก่อนถึงเส้นแบ่ง */
-}
-/* --- 🎨 CSS เพื่อลดขนาดส่วน Diagnosis และ Score Bars --- */
-
-/* 1. ลดขนาดข้อความวินิจฉัยหลัก (เช่น P. falciparum) */
-.overall-diagnosis-card > p { 
-    font-size: 1.2rem;   /* ลดขนาดฟอนต์ (จากเดิมที่อาจจะใหญ่กว่านี้) */
-    margin-bottom: 20px; /* ลดระยะห่างด้านล่างเล็กน้อย */
-}
-
-/* 2. ลดขนาดหัวข้อ "AI Confidence Score (%):" */
-.score-breakdown h5 {
-    font-size: 0.9rem;   /* ลดขนาดฟอนต์ */
-    margin-bottom: 10px; /* ลดระยะห่างด้านล่าง */
-}
-
-/* 3. ลดขนาดข้อความ (ชื่อเชื้อ และ %) และความสูงของแถบ bar */
-.score-item {
-    margin-bottom: 8px; /* ลดระยะห่างระหว่างแถบ */
-}
-
-.score-label,
-.score-value {
-    font-size: 0.95rem; /* ลดขนาดฟอนต์ของชื่อเชื้อและตัวเลข % */
-}
-
-.score-bar-container {
-    height: 18px; /* ลดความสูงของแถบ bar (ปรับค่าได้ตามชอบ) */
-}
-
-.score-bar {
-    height: 18px; /* ปรับความสูงของ bar สีเขียว/น้ำเงินให้เท่ากัน */
-}
-
-/* 4. (สำคัญ) ลบ/ปรับแก้ padding-bottom ที่เคยเพิ่มไว้ใน .score-breakdown */
-.score-breakdown {
-    opacity: 1; /* ทำให้กลับมาทึบแสงปกติ (ถ้าเคยตั้งไว้ 0.9) */
-    padding-bottom: 0; /* ลบช่องว่างด้านล่างสุด ก่อนถึงเส้นแบ่ง */
+@keyframes pulseBox {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
